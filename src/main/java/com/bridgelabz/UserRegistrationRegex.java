@@ -16,6 +16,10 @@ public class UserRegistrationRegex {
         System.out.println("Enter last name");
         String lastName = sc.next();
         userRegistrationRegex.checkLastName(lastName);
+
+        System.out.println("Enter email");
+        String email = sc.next();
+        userRegistrationRegex.checkEmail(email);
     }
 
     public void checkFirstName(String firstName) {
@@ -34,5 +38,14 @@ public class UserRegistrationRegex {
             System.out.println("Last name is Valid");
         else
             System.out.println("Last name is InValid");
+    }
+
+    public void checkEmail(String email) {
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+([._+-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.][a-zA-Z]{2,4})([.][a-zA-Z]{2})*$");
+        Matcher match = pattern.matcher(email);
+        if (match.matches())
+            System.out.println("Email is Valid");
+        else
+            System.out.println("Email is InValid");
     }
 }
