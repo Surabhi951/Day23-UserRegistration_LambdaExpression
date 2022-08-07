@@ -10,119 +10,100 @@ public class UserRegistrationRegex {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter first name");
-        String firstName = sc.next();
-        userRegistrationRegex.checkFirstName(firstName);
+        userRegistrationRegex.firstName.validate(sc.next());
 
         System.out.println("Enter last name");
-        String lastName = sc.next();
-        userRegistrationRegex.checkLastName(lastName);
+        userRegistrationRegex.lastName.validate(sc.next());
 
         System.out.println("Enter email");
-        String email = sc.next();
-        userRegistrationRegex.checkEmail(email);
+        userRegistrationRegex.email.validate(sc.next());
 
         System.out.println("Enter mobile number");
-        sc.nextLine();
-        String mobileNo = sc.nextLine();
-        userRegistrationRegex.checkMobileNo(mobileNo);
+        userRegistrationRegex.mobileNo.validate(sc.next());
 
         System.out.println("Enter password minimum 8 character");
-        String passwordRule1 = sc.next();
-        userRegistrationRegex.checkPasswordRule1(passwordRule1);
+        userRegistrationRegex.passwordRule1.validate(sc.next());
 
         System.out.println("Enter atleast one uppercase letter in password");
-        String passwordRule2 = sc.next();
-        userRegistrationRegex.checkPasswordRule2(passwordRule2);
+        userRegistrationRegex.passwordRule2.validate(sc.next());
 
         System.out.println("Enter atleast one numeric number in password");
-        String passwordRule3 = sc.next();
-        userRegistrationRegex.checkPasswordRule3(passwordRule3);
+        userRegistrationRegex.passwordRule3.validate(sc.next());
 
         System.out.println("Enter exactly one special character in password");
-        String passwordRule4 = sc.next();
-        userRegistrationRegex.checkPasswordRule4(passwordRule4);
+        userRegistrationRegex.passwordRule4.validate(sc.next());
     }
 
-    public boolean checkFirstName(String firstName) throws InvalidUserDetailsException{
+
+    public Validator firstName = (firstName) -> {
         Pattern pattern = Pattern.compile("^[A-Z][a-zA-Z]{2,}");
         Matcher match = pattern.matcher(firstName);
-        if (match.matches()) {
-            System.out.println("First name is valid");
-        }
-        else{
-            throw new InvalidUserDetailsException("First name is Invalid");
-        }
-        return match.matches();
+        if (match.matches())
+            return true;
+        else
+            throw new InvalidUserDetailsException("First name is Invalid" + firstName);
 
-    }
-    public boolean checkLastName(String lastName) throws InvalidUserDetailsException{
+    };
+    public Validator lastName = (lastName) -> {
         Pattern pattern = Pattern.compile("^[A-Z][a-zA-Z]{2,}");
         Matcher match = pattern.matcher(lastName);
         if (match.matches())
-            System.out.println("Last name is Valid");
+            return true;
         else
-            throw new InvalidUserDetailsException("Last name is InValid");
-        return match.matches();
-    }
+            throw new InvalidUserDetailsException("Last name is InValid" +lastName);
+    };
 
-    public boolean checkEmail(String email) throws InvalidUserDetailsException{
+    public Validator email = (email) -> {
         Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+([._+-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.][a-zA-Z]{2,4})([.][a-zA-Z]{2})*$");
         Matcher match = pattern.matcher(email);
         if (match.matches())
-            System.out.println("Email is Valid");
+            return true;
         else
             throw new InvalidUserDetailsException("Email is InValid");
-        return match.matches();
-    }
+    };
 
-    public boolean checkMobileNo(String mobileNo) throws InvalidUserDetailsException{
+    public Validator mobileNo = (mobileNo) -> {
         Pattern pattern = Pattern.compile("^[\\d]{2}\\s[\\d]{10}$");
         Matcher match = pattern.matcher(mobileNo);
         if (match.matches())
-            System.out.println("Mobile number is Valid");
+            return true;
         else
             throw new InvalidUserDetailsException("Mobile number is InValid");
-        return match.matches();
-    }
+    };
 
-    public boolean checkPasswordRule1(String passwordRule1) throws InvalidUserDetailsException{
+    public Validator passwordRule1 = (passwordRule1) -> {
         Pattern pattern = Pattern.compile("[0-9a-zA-Z@!+_.-]{8,}");
         Matcher match = pattern.matcher(passwordRule1);
         if (match.matches())
-            System.out.println("Valid");
+            return true;
         else
             throw new InvalidUserDetailsException("Password must have 8 character");
-        return match.matches();
-    }
+    };
 
-    public boolean checkPasswordRule2(String passwordRule2) throws InvalidUserDetailsException{
+    public Validator passwordRule2 = (passwordRule2) -> {
         Pattern pattern = Pattern.compile("(?=.*[A-Z])[0-9a-zA-Z@!+_.]{8,}");
         Matcher match = pattern.matcher(passwordRule2);
         if (match.matches())
-            System.out.println("Valid");
+            return true;
         else
             throw new InvalidUserDetailsException("Password must have atleast one uppercase letter");
-        return match.matches();
-    }
+    };
 
-    public boolean checkPasswordRule3(String passwordRule3) throws InvalidUserDetailsException{
+    public Validator passwordRule3 = (passwordRule3) -> {
         Pattern pattern = Pattern.compile("(?=.*[0-9])[0-9a-zA-Z@!+_.]{8,}");
         Matcher match = pattern.matcher(passwordRule3);
         if (match.matches())
-            System.out.println("Valid");
+            return true;
         else
             throw new InvalidUserDetailsException("Password must have atleast one numeric number");
-        return match.matches();
-    }
+    };
 
-    public boolean checkPasswordRule4(String passwordRule4) throws InvalidUserDetailsException{
+    public Validator passwordRule4 = (passwordRule4) -> {
         Pattern pattern = Pattern.compile("(?=.*[+._@!-])[0-9a-zA-Z@!+_.]{8,}");
         Matcher match = pattern.matcher(passwordRule4);
         if (match.matches())
-            System.out.println("Valid");
+            return true;
         else
             throw new InvalidUserDetailsException("Password must has exactly one special character");
-        return match.matches();
-    }
-
+    };
 }
