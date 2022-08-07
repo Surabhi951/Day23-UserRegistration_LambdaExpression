@@ -29,6 +29,10 @@ public class UserRegistrationRegex {
         System.out.println("Enter password minimum 8 character");
         String passwordRule1 = sc.next();
         userRegistrationRegex.checkPasswordRule1(passwordRule1);
+
+        System.out.println("Enter atleast one uppercase letter in password");
+        String passwordRule2 = sc.next();
+        userRegistrationRegex.checkPasswordRule2(passwordRule2);
     }
 
     public void checkFirstName(String firstName) {
@@ -74,5 +78,14 @@ public class UserRegistrationRegex {
             System.out.println("Valid");
         else
             System.out.println("Password must have 8 character");
+    }
+
+    public void checkPasswordRule2(String passwordRule2) {
+        Pattern pattern = Pattern.compile("(?=.*[A-Z])[0-9a-zA-Z@!+_.]{8,}");
+        Matcher match = pattern.matcher(passwordRule2);
+        if (match.matches())
+            System.out.println("Valid");
+        else
+            System.out.println("Password must have atleast one uppercase letter");
     }
 }
