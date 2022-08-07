@@ -20,6 +20,11 @@ public class UserRegistrationRegex {
         System.out.println("Enter email");
         String email = sc.next();
         userRegistrationRegex.checkEmail(email);
+
+        System.out.println("Enter mobile number");
+        sc.nextLine();
+        String mobileNo = sc.nextLine();
+        userRegistrationRegex.checkMobileNo(mobileNo);
     }
 
     public void checkFirstName(String firstName) {
@@ -47,5 +52,14 @@ public class UserRegistrationRegex {
             System.out.println("Email is Valid");
         else
             System.out.println("Email is InValid");
+    }
+
+    public void checkMobileNo(String mobileNo) {
+        Pattern pattern = Pattern.compile("^[\\d]{2}\\s[\\d]{10}$");
+        Matcher match = pattern.matcher(mobileNo);
+        if (match.matches())
+            System.out.println("Mobile number is Valid");
+        else
+            System.out.println("Mobile number is InValid");
     }
 }
