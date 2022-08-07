@@ -3,6 +3,8 @@ package com.bridgelabz;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class UserRegistrationRegexTest {
     static UserRegistrationRegex userRegistration;
@@ -106,5 +108,17 @@ public class UserRegistrationRegexTest {
     public void givenPasswordRule4_WhenInValid_ShouldReturnFalse(){
         boolean result=userRegistration.checkPasswordRule4("xyz123ab");
         Assertions.assertFalse(result);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"abc@yahoo.com" ,"abc-100@yahoo.com" ,"abc.100@yahoo.com" , "abc111@abc.com" ,"abc-100@abc.net" , "abc.100@abc.com.au" , "abc@1.com"})
+    public void givenEmail_WhenValid_ShouldReturnTrue(String email) {
+        Assertions.assertTrue(userRegistration.checkEmail(email));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"abc","abc@.com.my","abc123@gmail.a","abc123@.com","abc123@.com.com","abc()*@gmail.com","abc@%*.com","abc..2002@gmail.com","abc.@gmail.com","abc@abc@gmail.com",  "abc@gmail.com.1a"})
+    public void givenEmail_WhenInValid_ShouldReturnFalse(String email) {
+        Assertions.assertFalse(userRegistration.checkEmail(email));
     }
 }
