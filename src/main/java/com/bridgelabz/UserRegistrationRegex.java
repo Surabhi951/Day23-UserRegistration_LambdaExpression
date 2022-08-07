@@ -37,6 +37,10 @@ public class UserRegistrationRegex {
         System.out.println("Enter atleast one numeric number in password");
         String passwordRule3 = sc.next();
         userRegistrationRegex.checkPasswordRule3(passwordRule3);
+
+        System.out.println("Enter exactly one special character in password");
+        String passwordRule4 = sc.next();
+        userRegistrationRegex.checkPasswordRule4(passwordRule4);
     }
 
     public void checkFirstName(String firstName) {
@@ -100,5 +104,14 @@ public class UserRegistrationRegex {
             System.out.println("Valid");
         else
             System.out.println("Password must have atleast one numeric number");
+    }
+
+    public void checkPasswordRule4(String passwordRule4) {
+        Pattern pattern = Pattern.compile("(?=.*[+._@!-])[0-9a-zA-Z@!+_.]{8,}");
+        Matcher match = pattern.matcher(passwordRule4);
+        if (match.matches())
+            System.out.println("Valid");
+        else
+            System.out.println("Password must has exactly one special character");
     }
 }
