@@ -12,6 +12,10 @@ public class UserRegistrationRegex {
         System.out.println("Enter first name");
         String firstName = sc.next();
         userRegistrationRegex.checkFirstName(firstName);
+
+        System.out.println("Enter last name");
+        String lastName = sc.next();
+        userRegistrationRegex.checkLastName(lastName);
     }
 
     public void checkFirstName(String firstName) {
@@ -21,5 +25,14 @@ public class UserRegistrationRegex {
             System.out.println("First name is Valid");
         else
             System.out.println("First name is InValid");
+    }
+
+    public void checkLastName(String lastName) {
+        Pattern pattern = Pattern.compile("^[A-Z][a-zA-Z]{2,}");
+        Matcher match = pattern.matcher(lastName);
+        if (match.matches())
+            System.out.println("Last name is Valid");
+        else
+            System.out.println("Last name is InValid");
     }
 }
